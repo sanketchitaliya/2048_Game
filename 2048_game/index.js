@@ -5,7 +5,6 @@ let resetGameId = document.getElementById("resetButton");
 let board;
 
 function setGameUi() {
-
   board = [
     [0, 0, 0, 0],
     [0, 0, 0, 0],
@@ -25,13 +24,11 @@ function setGameUi() {
   }
   setTwo();
   setTwo();
-
 }
 
 setGameUi();
 
 function updateBox(box, num) {
-
   box.innerText = "";
   box.classList.value = "";
   box.classList.add("box");
@@ -44,11 +41,9 @@ function updateBox(box, num) {
       box.classList.add("x2048");
     }
   }
-
 }
 
 document.addEventListener("keyup", (e) => {
-
   if (e.code == "ArrowLeft") {
     slideLeft();
     setTwo();
@@ -63,17 +58,13 @@ document.addEventListener("keyup", (e) => {
     setTwo();
   }
   document.getElementById("score").innerText = score;
-
 });
 
 function filterZero(row) {
-
   return row.filter((num) => num != 0);
-
 }
 
 function slide(row) {
-
   row = filterZero(row);
 
   for (let i = 0; i < row.length - 1; i++) {
@@ -88,11 +79,9 @@ function slide(row) {
     row.push(0);
   }
   return row;
-
 }
 
 function slideLeft() {
-
   for (let r = 0; r < rows; r++) {
     let row = board[r];
     row = slide(row);
@@ -104,10 +93,12 @@ function slideLeft() {
     }
   }
 
+  if (isGameOver()) {
+    alert("Game Over!");
+  }
 }
 
 function slideRight() {
-
   for (let r = 0; r < rows; r++) {
     let row = board[r];
     row.reverse();
@@ -120,10 +111,12 @@ function slideRight() {
     }
   }
 
+  if (isGameOver()) {
+    alert("Game Over!");
+  }
 }
 
 function slideUp() {
-
   for (let c = 0; c < columns; c++) {
     let row = [board[0][c], board[1][c], board[2][c], board[3][c]];
     row = slide(row);
@@ -135,10 +128,12 @@ function slideUp() {
     }
   }
 
+  if (isGameOver()) {
+    alert("Game Over!");
+  }
 }
 
 function slideDown() {
-
   for (let c = 0; c < columns; c++) {
     let row = [board[0][c], board[1][c], board[2][c], board[3][c]];
     row.reverse();
@@ -152,16 +147,16 @@ function slideDown() {
     }
   }
 
+  if (isGameOver()) {
+    alert("Game Over!");
+  }
 }
 
-function resetGame(){
-
+function resetGame() {
   location.reload();
-  
 }
 
 function setTwo() {
-
   let found = true;
 
   while (found) {
@@ -176,25 +171,18 @@ function setTwo() {
       found = false;
     }
   }
+  if (isGameOver()) {
+    alert("Game Over!");
+  }
+}
 
+function isGameOver() {
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < columns; c++) {
+      if (board[r][c] === 0) return false;
+    }
+  }
+  return true;
 }
 
 resetGameId.addEventListener("click", resetGame);
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
